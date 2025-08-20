@@ -1,0 +1,545 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Fira+Code:wght@300;400;500;600&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Cyberpunk/Robotics Theme Design System */
+@layer base {
+  :root {
+    /* Core Background Colors */
+    --background: 220 15% 6%;
+    --background-secondary: 220 15% 8%;
+    --background-tertiary: 220 15% 10%;
+    --foreground: 200 20% 98%;
+
+    /* Neon Accent Colors */
+    --neon-cyan: 180 100% 50%;
+    --neon-blue: 210 100% 60%;
+    --neon-green: 140 100% 50%;
+    --neon-purple: 280 100% 70%;
+    --neon-pink: 320 100% 70%;
+
+    /* Primary Tech Colors */
+    --primary: 180 100% 50%;
+    --primary-glow: 180 100% 60%;
+    --primary-foreground: 220 15% 6%;
+    --primary-muted: 180 30% 20%;
+
+    /* Secondary Colors */
+    --secondary: 210 100% 60%;
+    --secondary-glow: 210 100% 70%;
+    --secondary-foreground: 220 15% 6%;
+
+    /* Accent Colors */
+    --accent: 140 100% 50%;
+    --accent-glow: 140 100% 60%;
+    --accent-foreground: 220 15% 6%;
+
+    /* UI Elements */
+    --card: 220 15% 8%;
+    --card-hover: 220 15% 12%;
+    --card-foreground: 200 20% 95%;
+    --border: 220 15% 20%;
+    --border-glow: 180 100% 50%;
+    --input: 220 15% 10%;
+    --ring: 180 100% 50%;
+
+    /* Special Effects */
+    --glow-primary: 0 0 20px hsl(var(--primary) / 0.5);
+    --glow-secondary: 0 0 20px hsl(var(--secondary) / 0.5);
+    --glow-accent: 0 0 20px hsl(var(--accent) / 0.5);
+    
+    /* Gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)));
+    --gradient-matrix: linear-gradient(180deg, hsl(var(--background)), hsl(var(--background-secondary)));
+    --gradient-glow: radial-gradient(circle, hsl(var(--primary) / 0.2), transparent 70%);
+    
+    /* Glass Effect */
+    --glass-bg: hsl(var(--background-secondary) / 0.1);
+    --glass-border: hsl(var(--primary) / 0.2);
+    
+    /* Animations */
+    --animation-speed: 0.3s;
+    --glow-animation: glow 2s ease-in-out infinite alternate;
+    
+    /* Typography */
+    --font-cyber: 'Orbitron', monospace;
+    --font-code: 'Fira Code', monospace;
+    --font-body: 'Inter', sans-serif;
+
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+    background-image: 
+      radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--secondary) / 0.1) 0%, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  /* Scrollbar Styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--background));
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary) / 0.5);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary));
+  }
+}
+
+@layer components {
+  /* Cyber Grid Background */
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  /* Neon Glow Effects */
+  .neon-glow {
+    filter: drop-shadow(var(--glow-primary));
+  }
+
+  .neon-glow-secondary {
+    filter: drop-shadow(var(--glow-secondary));
+  }
+
+  .neon-glow-accent {
+    filter: drop-shadow(var(--glow-accent));
+  }
+
+  /* Glass Morphism */
+  .glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+  }
+
+  /* Animated Border */
+  .animated-border {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .animated-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary)), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  /* Cyber Button */
+  .cyber-button {
+    @apply relative overflow-hidden bg-transparent border border-primary text-primary;
+    font-family: var(--font-cyber);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+  }
+
+  .cyber-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: hsl(var(--primary));
+    transition: left 0.3s ease;
+    z-index: -1;
+  }
+
+  .cyber-button:hover::before {
+    left: 0;
+  }
+
+  .cyber-button:hover {
+    color: hsl(var(--primary-foreground));
+    box-shadow: var(--glow-primary);
+  }
+
+  /* Matrix Rain Effect */
+  .matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0.1;
+  }
+
+  /* Typing Animation */
+  .typing-animation {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+  }
+
+  /* Glitch Effect */
+  .glitch {
+    position: relative;
+    animation: glitch 2s infinite;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch::before {
+    animation: glitch-1 0.5s infinite;
+    color: hsl(var(--neon-cyan));
+    z-index: -1;
+  }
+
+  .glitch::after {
+    animation: glitch-2 0.5s infinite;
+    color: hsl(var(--neon-pink));
+    z-index: -2;
+  }
+}
+
+@layer utilities {
+  .text-cyber {
+    font-family: var(--font-cyber);
+  }
+
+  .text-code {
+    font-family: var(--font-code);
+  }
+
+  .bg-cyber-gradient {
+    background: var(--gradient-cyber);
+  }
+
+  .bg-matrix-gradient {
+    background: var(--gradient-matrix);
+  }
+
+  /* Neon Text Colors */
+  .text-neon-cyan {
+    color: hsl(var(--neon-cyan));
+  }
+
+  .text-neon-blue {
+    color: hsl(var(--neon-blue));
+  }
+
+  .text-neon-green {
+    color: hsl(var(--neon-green));
+  }
+
+  .text-neon-purple {
+    color: hsl(var(--neon-purple));
+  }
+
+  .text-neon-pink {
+    color: hsl(var(--neon-pink));
+  }
+}
+
+/* Keyframe Animations */
+@keyframes glow {
+  from {
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  to {
+    filter: drop-shadow(0 0 20px currentColor);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: hsl(var(--primary));
+  }
+}
+
+@keyframes glitch {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-1 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+}
+
+@keyframes glitch-2 {
+  0%,
+  100% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+  60% {
+    transform: translate(-2px, -2px);
+  }
+  80% {
+    transform: translate(-2px, 2px);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 5px hsl(var(--primary) / 0.5);
+  }
+  50% {
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.8), 0 0 30px hsl(var(--primary) / 0.6);
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes robot-hover {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-15px) rotate(-2deg);
+  }
+}
+
+@keyframes robot-eyes {
+  0%, 90%, 100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes circuit-flow {
+  0% {
+    stroke-dashoffset: 1000;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes hologram {
+  0%, 100% {
+    opacity: 0.8;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes data-stream {
+  0% {
+    transform: translateY(100vh) scale(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) scale(1);
+    opacity: 0;
+  }
+}
+
+@keyframes particle-float {
+  0% {
+    transform: translate(0, 100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100px, -100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+@keyframes morphing-border {
+  0%, 100% {
+    border-radius: 50% 20% 80% 30%;
+  }
+  25% {
+    border-radius: 30% 70% 50% 80%;
+  }
+  50% {
+    border-radius: 80% 30% 20% 90%;
+  }
+  75% {
+    border-radius: 40% 80% 70% 20%;
+  }
+}
+
+@keyframes quantum-spin {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+  }
+  33% {
+    transform: rotateX(120deg) rotateY(120deg) rotateZ(0deg);
+  }
+  66% {
+    transform: rotateX(240deg) rotateY(240deg) rotateZ(120deg);
+  }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+  }
+}
+
+@keyframes neural-pulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: brightness(1) hue-rotate(0deg);
+  }
+  50% {
+    transform: scale(1.1);
+    filter: brightness(1.2) hue-rotate(180deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .cyber-grid {
+    background-size: 25px 25px;
+  }
+}
+
+/* High Performance Animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
